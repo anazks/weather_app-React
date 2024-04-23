@@ -4,7 +4,7 @@ import "./App.css";
 
 function App() {
   const [showSettings, setShowSettings] = useState(false);
-
+  const [f,setF] = useState((36 * 9/5) + 32 )
   const handleNotificationClick = () => {
     if ("Notification" in window) {
       Notification.requestPermission().then((permission) => {
@@ -28,18 +28,23 @@ function App() {
   return (
     <React.Fragment>
       <div className="container">
-        <button className="Button" onClick={handleNotificationClick}>
+        <button className="Button" style={{cursor:'pointer'}} onClick={handleNotificationClick}>
           Notification
         </button>
-        <button className="btn" onClick={handleSettingsClick}>
+        <div className="dropdown">
+        <button className="btn" >
           Settings
         </button>
+          <div class="dropdown-content">
+              <p onClick={handleSettingsClick}>View In Fahrenheit</p>
+          </div>
+        </div>
         <CurrentLocation />
 
         {showSettings && (
           <div className="settings-popup">
             {/* Your settings content goes here */}
-            <p> <button>Change Unit to F</button></p>
+            <p> <button> Unit {f}% F</button></p>
             <button onClick={handleCloseSettings}>Close</button>
           </div>
         )}
